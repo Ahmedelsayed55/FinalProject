@@ -9,18 +9,17 @@ const NavForMobile = () => {
     <div className="md:hidden">
       <nav className=" flex items-center justify-center gap-5 text-2xl">
         <NavLink className="flex relative p-3" to="/cart">
-          {" "}
-          <FaCartShopping />{" "}
+          
+          <FaCartShopping />
           <span className="absolute top-0 right-0 text-[15px] font-bold">
             0
-          </span>{" "}
+          </span>
         </NavLink>
         <NavLink className="flex relative p-3" to="/favorites">
-          {" "}
-          <GrFavorite />{" "}
+          <GrFavorite />
           <span className="absolute top-0 right-0 text-[15px] font-bold">
             0
-          </span>{" "}
+          </span>
         </NavLink>
         <CiMenuFries
           onClick={() => setOpen(!open)}
@@ -28,44 +27,46 @@ const NavForMobile = () => {
         />
       </nav>
 
-      {open && (
-        <div onClick={() => setOpen(false)} className="w-full fixed top-0 left-0 bg-black/20">
-          <nav onClick={(e)=> e.stopPropagation()} className=" flex flex-col items-center justify-center gap-7 bg-white p-7 mt-16 text-[#7C2D12]">
-            <NavLink
-              className="transition duration-200 hover:text-[#FB923C] font-bold"
-              to="/"
-            >
-              {" "}
-              Home
-            </NavLink>
-            <NavLink
-              className="transition duration-200 hover:text-[#FB923C] font-bold"
-              to="/contact"
-            >
-              Contact
-            </NavLink>
-            <NavLink
-              className="flex relative p-3 text-2xl hover:text-[#FB923C]"
-              to="/cart"
-            >
-              <FaCartShopping />
-              <span className="absolute top-0 right-0 text-[15px] font-bold">
-                {" "}
-                0{" "}
-              </span>
-            </NavLink>
-            <NavLink
-              className="flex relative p-3 text-2xl hover:text-[#FB923C]"
-              to="/favorites"
-            >
-              <GrFavorite />
-              <span className="absolute top-0 right-0 text-[15px] font-bold">
-                0
-              </span>
-            </NavLink>
-          </nav>
-        </div>
-      )}
+
+  <div
+    onClick={() => setOpen(false)}
+  className={`
+    fixed inset-0 z-50 bg-black/40
+    transition-opacity duration-500
+    ${open ? "opacity-100 visible" : "opacity-0 invisible"}
+  `}
+  >
+    <nav
+      onClick={(e) => e.stopPropagation()}
+      className="mt-16 bg-white p-8 flex flex-col items-center gap-8 text-[#7C2D12]"
+    >
+      <NavLink onClick={() => setOpen(false)} to="/">
+        Home
+      </NavLink>
+
+      <NavLink onClick={() => setOpen(false)} to="/contact">
+        Contact
+      </NavLink>
+
+      <div className="flex gap-8">
+        <NavLink onClick={() => setOpen(false)} className="relative text-2xl" to="/cart">
+          <FaCartShopping />
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+            0
+          </span>
+        </NavLink>
+
+        <NavLink onClick={() => setOpen(false)} className="relative text-2xl" to="/favorites">
+          <GrFavorite />
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+            0
+          </span>
+        </NavLink>
+      </div>
+    </nav>
+  </div>
+
+
     </div>
   );
 };
