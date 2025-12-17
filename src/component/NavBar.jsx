@@ -24,10 +24,12 @@ const NavBar = () => {
             Contact
           </NavLink>
           <NavLink className="flex relative p-3 text-2xl hover:text-[#FB923C]" to="/cart">
-            <FaCartShopping /><span className="absolute top-0 right-0 text-[15px] font-bold"> 0 </span>
+            <FaCartShopping />
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+               0 </span>
           </NavLink>
           <NavLink className="flex relative p-3 text-2xl hover:text-[#FB923C]" to="/favorites"><GrFavorite />
-          <span className="absolute top-0 right-0 text-[15px] font-bold">
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
             0
             </span>
           </NavLink>

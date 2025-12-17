@@ -11,13 +11,13 @@ const NavForMobile = () => {
         <NavLink className="flex relative p-3" to="/cart">
           
           <FaCartShopping />
-          <span className="absolute top-0 right-0 text-[15px] font-bold">
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
             0
           </span>
         </NavLink>
         <NavLink className="flex relative p-3" to="/favorites">
           <GrFavorite />
-          <span className="absolute top-0 right-0 text-[15px] font-bold">
+          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
             0
           </span>
         </NavLink>
@@ -40,6 +40,7 @@ const NavForMobile = () => {
       onClick={(e) => e.stopPropagation()}
       className="mt-16 bg-white p-8 flex flex-col items-center gap-8 text-[#7C2D12]"
     >
+        <h1>My Logo</h1>
       <NavLink onClick={() => setOpen(false)} to="/">
         Home
       </NavLink>
