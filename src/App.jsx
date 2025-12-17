@@ -11,7 +11,7 @@ import Layout from './pages/Layout';
 
 const App = () => {
   return (
-    <div>
+    <div className=' bg-[#FFF7ED] text-black'>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
