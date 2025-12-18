@@ -48,18 +48,20 @@ const NavForMobile = () => {
       <NavLink onClick={() => setOpen(false)} to="/contact">
         Contact
       </NavLink>
+      <NavLink onClick={() => setOpen(false)} to="/menu">
+        Menu      </NavLink>
 
       <div className="flex gap-8">
         <NavLink onClick={() => setOpen(false)} className="relative text-2xl" to="/cart">
           <FaCartShopping />
-          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+          <span className="absolute -top-2 -right-3 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
             0
           </span>
         </NavLink>
 
         <NavLink onClick={() => setOpen(false)} className="relative text-2xl" to="/favorites">
           <GrFavorite />
-          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+          <span className="absolute -top-2 -right-3 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
             0
           </span>
         </NavLink>

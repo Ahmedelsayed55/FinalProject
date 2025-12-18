@@ -14,7 +14,7 @@ const NavBar = () => {
             className="transition duration-200 hover:text-[#FB923C] font-bold"
             to="/"
           >
-            {" "}
+    
             Home
           </NavLink>
           <NavLink
@@ -22,6 +22,12 @@ const NavBar = () => {
             to="/contact"
           >
             Contact
+          </NavLink>
+          <NavLink
+            className="transition duration-200 hover:text-[#FB923C] font-bold"
+            to="/menu"
+          >
+            Menu
           </NavLink>
           <NavLink className="flex relative p-3 text-2xl hover:text-[#FB923C]" to="/cart">
             <FaCartShopping />
