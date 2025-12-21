@@ -11,6 +11,9 @@ const Menu = () => {
       
     });
   },[])
+if (categories.length === 0) {
+  return <div className="text-center font-bold text-3xl p-20">Loading...</div>;
+}
   return (
     <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {categories.map((category) => (
