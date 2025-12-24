@@ -57,7 +57,7 @@ const FeaturesProductSection = () => {
                   {/* Image */}
                   <div className="w-full h-44 overflow-hidden rounded-md">
                     <img
-                      src={"http://localhost:1337" + item.cover.url}
+                      src={"https://ear-strikes-plus-lighter.trycloudflare.com" + item.cover.url}
                       alt="product"
                       className="w-full h-full object-cover"
                     />
