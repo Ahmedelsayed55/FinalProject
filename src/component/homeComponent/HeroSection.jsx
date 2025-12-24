@@ -6,13 +6,13 @@ import img from '../../assets/hero.jpg';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import './HeroSwiper.css';
+
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
 
 const HeroSection = () => {
   return (
-  <div className='w-full h-[60vh] '>
+  <div className='w-full md:h-[60vh] '>
     <div className='container mx-auto mb-5 h-full'>
 
  
@@ -28,7 +28,7 @@ const HeroSection = () => {
         }}
      
         modules={[Autoplay, Pagination, ]}
-        className="mySwiper h-full"
+        className="mySwiper"
       >
 
         <SwiperSlide>

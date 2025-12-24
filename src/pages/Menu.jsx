@@ -15,7 +15,7 @@ if (categories.length === 0) {
   return <div className="text-center font-bold text-3xl p-20">Loading...</div>;
 }
   return (
-    <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 py-20">
       {categories.map((category) => (
           <NavLink
           key={category.documentId}
@@ -26,7 +26,7 @@ if (categories.length === 0) {
         <img
           src={domain + category.img.url}
           alt=""
-          className=" w-full  h-56 object-cover transition-transform  duration-300  group-hover:scale-110 "
+          className=" w-full  h-56 object-contain transition-transform  duration-300  group-hover:scale-110 "
         />
 
         <div className=" absolute inset-0  bg-black/30 opacity-0 group-hover:opacity-100 transition "/>
