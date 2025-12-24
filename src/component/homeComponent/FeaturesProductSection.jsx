@@ -11,7 +11,6 @@ import "./featurs.css";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Features } from "tailwindcss";
 
 const FeaturesProductSection = () => {
   const [Features, setFeatures] = useState([]);
@@ -27,7 +26,7 @@ const FeaturesProductSection = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <div className="container mx-auto mb-5 py-20 ">
         <h2 className="text-2xl font-bold text-center mb-10">
           Features Product
