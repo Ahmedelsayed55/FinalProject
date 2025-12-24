@@ -26,7 +26,7 @@ const OneProductSection = () => {
           <img className="w-full" src={"http://localhost:1337" + oneProduct.img.url} alt="" />
         </div>
         <div className="w-full  flex flex-col gap-5 p-10 md:py-20">
-          <h2 cassName="text-4xl font-bold ">{oneProduct?.name}</h2>
+          <h2 className="text-4xl font-bold ">{oneProduct?.name}</h2>
           <p className="text-gray-500 w-full md:w-2/3 ">{oneProduct.desc}</p>
           <p className="text-gray-500">${oneProduct.price} </p>
           <div className="flex gap-2  ">
