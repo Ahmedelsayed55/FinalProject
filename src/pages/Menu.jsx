@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 const Menu = () => {
   const [categories, setCategories] = useState([]);
-  let domain = "http://localhost:1337"
+  let domain = "https://ear-strikes-plus-lighter.trycloudflare.com"
   useEffect(() => {
     axios.get(domain + "/api/categories?populate=*").then((res) => {
       setCategories(res.data.data);

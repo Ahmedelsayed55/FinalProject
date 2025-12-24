@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const productId = params.productId;
 
   useEffect(() => {
-    let url = `http://localhost:1337/api/products/${productId}`;
+    let url = `https://ear-strikes-plus-lighter.trycloudflare.com/api/products/${productId}`;
     axios
       .get(url, {
         params: {
@@ -34,7 +34,7 @@ const ProductDetails = () => {
       <div className="flex flex-col gap-4 ">
         <div className="w-full h-96">
           <img
-            src={`http://localhost:1337${mainImage}`}
+            src={`https://ear-strikes-plus-lighter.trycloudflare.com${mainImage}`}
             alt={product.name}
             className="w-full h-full object-contain rounded-md shadow-lg"
           />
@@ -44,7 +44,7 @@ const ProductDetails = () => {
           {product.imgs.map((img) => (
             <img
               key={img.documentId}
-              src={`http://localhost:1337${img.url}`}
+              src={`https://ear-strikes-plus-lighter.trycloudflare.com${img.url}`}
               alt={product.name}
               className={`w-15 h-15 md:w-30 md:h-30 object-contain rounded-md cursor-pointer border-2 border-gray-300 opacity-70 ${
                 mainImage === img.url ? "border-orange-400 opacity-100" : ""

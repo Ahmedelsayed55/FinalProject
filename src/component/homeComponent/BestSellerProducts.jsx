@@ -17,7 +17,7 @@ const BestSellerProducts = () => {
   const [bestSeller, setBestSeller] = useState([]);
   useEffect(() => {
     let url =
-      "http://localhost:1337" + `/api/products?filters[bestseller][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
+      "https://ear-strikes-plus-lighter.trycloudflare.com" + `/api/products?filters[bestseller][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
     axios
       .get(url)
       .then((res) => {
@@ -55,7 +55,7 @@ const BestSellerProducts = () => {
                   {/* Image */}
                   <div className="w-full h-44 overflow-hidden rounded-md">
                     <img
-                      src={"http://localhost:1337" + item.cover.url}
+                      src={"https://ear-strikes-plus-lighter.trycloudflare.com" + item.cover.url}
                       alt="product"
                       className="w-full h-full object-cover"
                     />

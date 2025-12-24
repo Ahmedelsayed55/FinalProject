@@ -6,7 +6,7 @@ const OneProductSection = () => {
   const [oneProduct, setOneProduct] = useState();
   useEffect(() => {
     axios
-      .get(`http://localhost:1337/api/oneproducts?populate=*`)
+      .get(`https://ear-strikes-plus-lighter.trycloudflare.com/api/oneproducts?populate=*`)
       .then((res) => {
         // console.log(res.data.data[0]);
         setOneProduct(res.data.data[0]);
@@ -23,7 +23,7 @@ const OneProductSection = () => {
       </h2>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2  px-2 md:px-0">
         <div className="w-full h-full p-10 shadow">
-          <img className="w-full" src={"http://localhost:1337" + oneProduct.img.url} alt="" />
+          <img className="w-full" src={"https://ear-strikes-plus-lighter.trycloudflare.com" + oneProduct.img.url} alt="" />
         </div>
         <div className="w-full  flex flex-col gap-5 p-10 md:py-20">
           <h2 className="text-4xl font-bold ">{oneProduct?.name}</h2>

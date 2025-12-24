@@ -7,7 +7,7 @@ const Product = () => {
   const parm = useParams();
   let idCat = parm.id;
   useEffect(() => {
-    let url = "http://localhost:1337" + `/api/categories/${idCat}`;
+    let url = "https://ear-strikes-plus-lighter.trycloudflare.com" + `/api/categories/${idCat}`;
     axios
       .get(url, {
         params: {
@@ -31,7 +31,7 @@ const Product = () => {
         >
           {/* Image */}
           <img
-            src={"http://localhost:1337" + category.cover.url}
+            src={"https://ear-strikes-plus-lighter.trycloudflare.com" + category.cover.url}
             alt=""
             className=" w-full  h-56 object-cover transition-transform  duration-300  group-hover:scale-110 "
           />
