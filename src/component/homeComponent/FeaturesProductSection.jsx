@@ -11,12 +11,13 @@ import "./featurs.css";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { domain } from "../../store/Store";
 
 const FeaturesProductSection = () => {
   const [Features, setFeatures] = useState([]);
   useEffect(() => {
     let url =
-      "https://ear-strikes-plus-lighter.trycloudflare.com" + `/api/products?filters[featured][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
+      `${domain}` + `/api/products?filters[featured][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
     axios
       .get(url)
       .then((res) => {
@@ -57,7 +58,7 @@ const FeaturesProductSection = () => {
                   {/* Image */}
                   <div className="w-full h-44 overflow-hidden rounded-md">
                     <img
-                      src={"https://ear-strikes-plus-lighter.trycloudflare.com" + item.cover.url}
+                      src={domain + item.cover.url}
                       alt="product"
                       className="w-full h-full object-cover"
                     />

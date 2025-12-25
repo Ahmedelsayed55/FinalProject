@@ -2,15 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GrFavorite } from "react-icons/gr";
 import { useParams } from "react-router-dom";
+import { domain } from "../store/Store";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState(""); // الصورة الكبيرة
   const params = useParams();
   const productId = params.productId;
-
+  
   useEffect(() => {
-    let url = `https://ear-strikes-plus-lighter.trycloudflare.com/api/products/${productId}`;
+    let url = `${domain}/api/products/${productId}`;
     axios
       .get(url, {
         params: {
@@ -18,7 +19,7 @@ const ProductDetails = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setProduct(res.data.data);
         // خلي الصورة الكبيرة تبدأ بالـ cover
         setMainImage(res.data.data.cover.url);
@@ -34,7 +35,7 @@ const ProductDetails = () => {
       <div className="flex flex-col gap-4 ">
         <div className="w-full h-96">
           <img
-            src={`https://ear-strikes-plus-lighter.trycloudflare.com${mainImage}`}
+            src={`${domain}${mainImage}`}
             alt={product.name}
             className="w-full h-full object-contain rounded-md shadow-lg"
           />
@@ -44,7 +45,7 @@ const ProductDetails = () => {
           {product.imgs.map((img) => (
             <img
               key={img.documentId}
-              src={`https://ear-strikes-plus-lighter.trycloudflare.com${img.url}`}
+              src={`${domain}${img.url}`}
               alt={product.name}
               className={`w-15 h-15 md:w-30 md:h-30 object-contain rounded-md cursor-pointer border-2 border-gray-300 opacity-70 ${
                 mainImage === img.url ? "border-orange-400 opacity-100" : ""

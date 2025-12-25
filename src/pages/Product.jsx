@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { domain } from "../store/Store";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
   const parm = useParams();
   let idCat = parm.id;
   useEffect(() => {
-    let url = "https://ear-strikes-plus-lighter.trycloudflare.com" + `/api/categories/${idCat}`;
+    let url = `${domain}` + `/api/categories/${idCat}`;
     axios
       .get(url, {
         params: {

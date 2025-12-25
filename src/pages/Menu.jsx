@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { domain } from "../store/Store";
 const Menu = () => {
   const [categories, setCategories] = useState([]);
-  let domain = "https://ear-strikes-plus-lighter.trycloudflare.com"
+  
   useEffect(() => {
     axios.get(domain + "/api/categories?populate=*").then((res) => {
       setCategories(res.data.data);
