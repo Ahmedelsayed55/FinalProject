@@ -8,22 +8,24 @@ import "swiper/css/pagination";
 
 import "./featurs.css";
 
-import { Pagination } from "swiper/modules";
+import { Pagination,Autoplay } from "swiper/modules";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { domain } from "../../store/Store";
+import { cart, domain } from "../../store/Store";
+import { favorites } from "../../store/Favorites";
+import { GrFavorite } from "react-icons/gr";
 
 const FeaturesProductSection = () => {
+  const { addToFavorites } = favorites();
+  const { addToCart } = cart();
   const [Features, setFeatures] = useState([]);
   useEffect(() => {
     let url =
-      `${domain}` + `/api/products?filters[featured][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
-    axios
-      .get(url)
-      .then((res) => {
-
-        setFeatures(res.data.data);
-      });
+      `${domain}` +
+      `/api/products?filters[featured][$eq]=true&pagination[limit]=8&sort[0]=createdAt:desc&populate=*`;
+    axios.get(url).then((res) => {
+      setFeatures(res.data.data);
+    });
   }, []);
 
   return (
@@ -32,60 +34,54 @@ const FeaturesProductSection = () => {
         <h2 className="text-2xl font-bold text-center mb-10">
           Features Product
         </h2>
-        <Swiper 
-          loop={Features.length > 3}
-          effect="coverflow"
-          grabCursor
-          centeredSlides={false}
+        <Swiper
           slidesPerView="auto"
-          spaceBetween={60}
-          coverflowEffect={{
-            rotate: 30,
-            stretch: 0,
-            depth: 60,
-            modifier: 1,
+          spaceBetween={30}
+          autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+          pagination={{
+            clickable: true,
           }}
-          pagination={{ clickable: true }}
-      
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           className="mySwiper"
         >
           {Features.map((item) => (
-            
-              <SwiperSlide key={item.documentId}>
-                <Link  to={`./${item.documentId}`}>
-                <div className="w-full  flex flex-col items-center gap-3 p-5 shadow bg-white ">
-                  {/* Image */}
+            <SwiperSlide key={item.documentId}>
+              <div className="w-full flex flex-col gap-3 p-5 shadow bg-white">
+                <Link to={`./${item.documentId}`}>
                   <div className="w-full h-44 overflow-hidden rounded-md">
                     <img
                       src={domain + item.cover.url}
                       alt="product"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
                     />
                   </div>
 
-                  <h3 className="font-semibold"> {item.name}</h3>
-                  <p className="text-sm text-gray-500 line-clamp-1">{item.desc}</p>
-                  <p className="font-bold">{item.price}</p>
-
-                  <div className="flex gap-3 mt-2">
-                    <button className="px-3 py-1 border rounded">
-                      Favorite
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        alert("DSas");
-                      }}
-                      className="px-3 py-1 bg-black cursor-pointer text-white rounded"
-                    >
-                      Add to cart
-                    </button>
+                  <div className="h-28 flex flex-col justify-between">
+                    <h3 className="font-semibold">{item.name}</h3>
+                    <p className="text-sm text-gray-500 line-clamp-3 w-2/3">
+                      {item.desc}
+                    </p>
+                    <p className="font-bold">{item.price}</p>
                   </div>
+                </Link>
+
+                <div className="flex gap-3 mt-2">
+                  <button 
+                   onClick={() => addToFavorites(item)}
+                  className="px-3 cursor-pointer py-1 border rounded"><GrFavorite className="text-2xl" /></button>
+
+                  <button
+                    onClick={() => addToCart(item)}
+                    className="px-3 w-full cursor-pointer py-1 bg-black text-white rounded"
+                  >
+                    Add to cart
+                  </button>
                 </div>
-                   </Link>
-              </SwiperSlide>
-         
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>

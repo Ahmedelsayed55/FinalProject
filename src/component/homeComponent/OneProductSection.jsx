@@ -1,9 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GrFavorite } from "react-icons/gr";
-import { domain } from "../../store/Store";
+import { cart, domain } from "../../store/Store";
+import { favorites } from "../../store/Favorites";
+
 
 const OneProductSection = () => {
+  const {addToFavorites} = favorites();
+  const {addToCart} = cart();
   const [oneProduct, setOneProduct] = useState();
   useEffect(() => {
     axios
@@ -24,15 +28,15 @@ const OneProductSection = () => {
       </h2>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2  px-2 md:px-0">
         <div className="w-full h-full p-10 shadow">
-          <img className="w-full" src={domain + oneProduct.img.url} alt="" />
+          <img className="w-full" src={domain + oneProduct.cover.url} alt="" />
         </div>
         <div className="w-full  flex flex-col gap-5 p-10 md:py-20">
           <h2 className="text-4xl font-bold ">{oneProduct?.name}</h2>
           <p className="text-gray-500 w-full md:w-2/3 ">{oneProduct.desc}</p>
           <p className="text-gray-500">${oneProduct.price} </p>
           <div className="flex gap-2  ">
-            <button className=" p-3 text-2xl hover:text-white hover:bg-black bg-white transition duration-300 rounded cursor-pointer"><GrFavorite /></button>
-            <button className="bg-black hover:bg-white hover:text-black text-white transition duration-300 py-2 cursor-pointer rounded w-1/2">Add to Cart</button>
+            <button onClick={()=> addToFavorites(oneProduct )} className=" p-3 text-2xl hover:text-white hover:bg-black  shadow border transition duration-300 rounded cursor-pointer"><GrFavorite /></button>
+            <button onClick={() => addToCart(oneProduct)} className="bg-black hover:bg-white hover:text-black text-white transition duration-300 py-2 cursor-pointer rounded w-1/2">Add to Cart</button>
           </div>
         </div>
       </div>

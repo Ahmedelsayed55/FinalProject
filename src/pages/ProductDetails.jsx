@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GrFavorite } from "react-icons/gr";
 import { useParams } from "react-router-dom";
-import { domain } from "../store/Store";
+import { cart, domain } from "../store/Store";
+import { favorites } from "../store/Favorites";
 
 const ProductDetails = () => {
+  const {addToFavorites}= favorites();
+  const { addToCart } = cart();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState(""); // الصورة الكبيرة
   const params = useParams();
@@ -42,7 +45,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="flex gap-4 justify-center">
-          {product.imgs.map((img) => (
+          {product?.imgs?.map((img) => (
             <img
               key={img.documentId}
               src={`${domain}${img.url}`}
@@ -62,10 +65,10 @@ const ProductDetails = () => {
         <p className="text-gray-600 mt-2 whitespace-pre-line lg:w-2/3">{product.desc}</p>
         <p className="font-bold text-xl my-3">{product.price} EGP</p>
         <div className="flex gap-2">
-          <button className=" p-3 text-2xl hover:text-white hover:bg-black bg-white transition duration-300 rounded cursor-pointer">
+          <button onClick={()=> addToFavorites(product)} className=" p-3 text-2xl hover:text-white hover:bg-black bg-white transition duration-300 rounded cursor-pointer">
             <GrFavorite />
           </button>
-          <button className="bg-black hover:bg-white hover:text-black text-white transition duration-300 py-2 cursor-pointer rounded w-1/2">
+          <button onClick={() => addToCart(product)} className="bg-black hover:bg-white hover:text-black text-white transition duration-300 py-2 cursor-pointer rounded w-1/2">
             Add to Cart
           </button>
         </div>

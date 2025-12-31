@@ -3,22 +3,30 @@ import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
 import { CiMenuFries } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
+import { cart } from "../store/Store";
+import { favorites } from "../store/Favorites";
 const NavForMobile = () => {
+  const { favoritesItem } = favorites();
+  const { cartItem } = cart();
   const [open, setOpen] = React.useState(false);
   return (
     <div className="md:hidden">
       <nav className=" flex items-center justify-center gap-5 text-2xl">
         <NavLink className="flex relative p-3" to="/cart">
           <FaCartShopping />
-          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-            0
-          </span>
+          {cartItem.length > 0 && (
+            <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+              {cartItem.length}
+            </span>
+          )}
         </NavLink>
         <NavLink className="flex relative p-3" to="/favorites">
           <GrFavorite />
-          <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-            0
-          </span>
+          {favoritesItem.length > 0 && (
+            <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+              {favoritesItem.length}
+            </span>
+          )}
         </NavLink>
         <CiMenuFries
           onClick={() => setOpen(!open)}
@@ -84,9 +92,11 @@ const NavForMobile = () => {
               to="/cart"
             >
               <FaCartShopping />
-              <span className="absolute -top-2 -right-3 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-                0
-              </span>
+              {cartItem.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+                  {cartItem.length}
+                </span>
+              )}
             </NavLink>
 
             <NavLink
@@ -95,9 +105,11 @@ const NavForMobile = () => {
               to="/favorites"
             >
               <GrFavorite />
-              <span className="absolute -top-2 -right-3 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-                0
-              </span>
+              {favoritesItem.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+                  {favoritesItem.length}
+                </span>
+              )}
             </NavLink>
           </div>
         </nav>

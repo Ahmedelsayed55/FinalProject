@@ -3,7 +3,11 @@ import { NavLink } from "react-router-dom";
 import NavBarForMobile from "./NavForMobile";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
+import { cart } from "../store/Store";
+import { favorites } from "../store/Favorites";
 const NavBar = () => {
+  const { favoritesItem } = favorites();
+  const { cartItem } = cart();
   return (
     <div className="w-full bg-white shadow-md">
       <div className=" container mx-auto flex  items-center justify-between p-4 text-[#7C2D12]">
@@ -33,28 +37,47 @@ const NavBar = () => {
             Contact
           </NavLink>
           <NavLink
-            className={({ isActive })=> "transition duration-200 hover:text-[#FB923C] font-bold" + (isActive ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1" : "")}
+            className={({ isActive }) =>
+              "transition duration-200 hover:text-[#FB923C] font-bold" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            }
             to="/menu"
           >
             Menu
           </NavLink>
           <NavLink
-            className="flex relative p-3 text-2xl hover:text-[#FB923C]"
+    className={({ isActive }) =>
+              "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            }
             to="/cart"
           >
-            <FaCartShopping />
-            <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-              0
-            </span>
+            <FaCartShopping  className="text-2xl"/>
+            {cartItem.length > 0 && (
+              <span className="absolute -top-2 -right-4 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+                {cartItem.length}
+              </span>
+            )}
           </NavLink>
           <NavLink
-            className="flex relative p-3 text-2xl hover:text-[#FB923C]"
+             className={({ isActive }) =>
+              "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            }
             to="/favorites"
           >
-            <GrFavorite />
-            <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
-              0
-            </span>
+            <GrFavorite className="text-2xl" />
+            {favoritesItem.length > 0 && (
+              <span className="absolute -top-2 -right-4 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
+                {favoritesItem.length}
+              </span>
+            )}
           </NavLink>
         </nav>
         {/* nav for mobile */}

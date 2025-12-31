@@ -32,14 +32,14 @@ const Product = () => {
         >
           {/* Image */}
           <img
-            src={"https://ear-strikes-plus-lighter.trycloudflare.com" + category.cover.url}
+            src={domain + category.cover.url}
             alt=""
-            className=" w-full  h-56 object-cover transition-transform  duration-300  group-hover:scale-110 "
+            className=" w-full  h-56 object-contain transition-transform  duration-300  group-hover:scale-110 "
           />
 
           <div className=" absolute inset-0  bg-black/30 opacity-0 group-hover:opacity-100 transition " />
 
-          <h3 className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-xl font-bold transition-all duration-300 group-hover:bottom-6">
+          <h3 className="absolute bottom-4 left-1/2 -translate-x-1/2  text-xl font-bold transition-all duration-300 group-hover:bottom-6">
             {category.name}
           </h3>
         </NavLink>
