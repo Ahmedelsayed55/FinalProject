@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 
 import "./featurs.css";
 
-import { Pagination,Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { cart, domain } from "../../store/Store";
@@ -38,9 +38,9 @@ const FeaturesProductSection = () => {
           slidesPerView="auto"
           spaceBetween={30}
           autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           pagination={{
             clickable: true,
           }}
@@ -49,9 +49,9 @@ const FeaturesProductSection = () => {
         >
           {Features.map((item) => (
             <SwiperSlide key={item.documentId}>
-              <div className="w-full flex flex-col gap-3 p-5 shadow bg-white">
+              <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
                 <Link to={`./${item.documentId}`}>
-                  <div className="w-full h-44 overflow-hidden rounded-md">
+                  <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
                     <img
                       src={domain + item.cover.url}
                       alt="product"
@@ -61,7 +61,7 @@ const FeaturesProductSection = () => {
 
                   <div className="h-28 flex flex-col justify-between">
                     <h3 className="font-semibold">{item.name}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-3 w-2/3">
+                    <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
                       {item.desc}
                     </p>
                     <p className="font-bold">{item.price}</p>
@@ -69,13 +69,16 @@ const FeaturesProductSection = () => {
                 </Link>
 
                 <div className="flex gap-3 mt-2">
-                  <button 
-                   onClick={() => addToFavorites(item)}
-                  className="px-3 cursor-pointer py-1 border rounded"><GrFavorite className="text-2xl" /></button>
+                  <button
+                    onClick={() => addToFavorites(item)}
+                    className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
+                  >
+                    <GrFavorite className="text-2xl" />
+                  </button>
 
                   <button
                     onClick={() => addToCart(item)}
-                    className="px-3 w-full cursor-pointer py-1 bg-black text-white rounded"
+                    className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
                   >
                     Add to cart
                   </button>

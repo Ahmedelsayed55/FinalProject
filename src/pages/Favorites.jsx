@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { favorites } from "../store/Favorites";
 import { cart, domain } from "../store/Store";
 import { FaCartShopping, FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { MdFavorite } from "react-icons/md";
 const Favorites = () => {
+   const [search, setSearch] = useState("");
   const { favoritesItem, removeItemFromFavorites } = favorites();
   const { addToCart } = cart();
+    const filteredFavorites = favoritesItem.filter((item) => {
+    return (
+      item.name?.toLowerCase().includes(search.toLowerCase()) ||
+      item.price?.toString().includes(search)
+    );
+  });
   return (
-    <div className="w-full  py-5">
+    <div className="w-full py-5">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex gap-5 items-center">
@@ -18,26 +25,28 @@ const Favorites = () => {
           <div className="w-1/2">
             <input
               type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search"
-              className=" w-full p-2 border focus:border-blue-200 outline-0 shadow-2xl rounded-2xl"
+              className=" w-full p-2 border border-yellow-500 focus:border-yellow-700 focus:shadow-yellow-500 outline-0 shadow rounded-2xl"
             />
           </div>
         </div>
         <p className="text-gray-500 text-2xl mt-10">
           Here You can find your favorite products :)
         </p>
-        {favoritesItem.length > 0 ? (
+        {filteredFavorites.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 py-20">
-            {favoritesItem.map((item) => (
+            {filteredFavorites.map((item) => (
               <div key={item.documentId} className="shadow-md rounded p-4 ">
-                <div className=" w-full flex  items-center justify-between mt-2">
+                <div className=" w-full flex  items-center justify-between mt-2 ">
                   <button
                     onClick={() => addToCart(item)}
-                    className="px-3 py-1 text-yellow-800 cursor-pointer rounded text-4xl"
+                    className="px-3 py-1 text-yellow-800 cursor-pointer rounded text-4xl hover:text-yellow-700 transition duration-300 active:text-yellow-900 active:scale-90"
                   >
                  <FaCartShopping/>
                   </button>
-                  <button onClick={() => removeItemFromFavorites(item)} className="px-3 py-1 text-red-800 cursor-pointer rounded text-4xl">
+                  <button onClick={() => removeItemFromFavorites(item)} className="px-3 py-1 text-red-800 cursor-pointer rounded text-4xl hover:text-red-700 transition duration-300 active:text-red-900 active:scale-90">
                     <MdFavorite />
                   </button>
                 </div>

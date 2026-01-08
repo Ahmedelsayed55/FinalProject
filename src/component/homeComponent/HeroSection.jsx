@@ -12,7 +12,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 const HeroSection = () => {
   return (
-  <div className='w-full md:h-[60vh] md:mb-20 '>
+  <div className='w-full md:h-[60vh] md:mb-20'>
     <div className='container mx-auto mb-5 h-full'>
 
  

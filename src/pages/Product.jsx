@@ -1,9 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { domain } from "../store/Store";
+import { Link, NavLink, useParams } from "react-router-dom";
+import { cart, domain } from "../store/Store";
+import { favorites } from "../store/Favorites";
+import { GrFavorite } from "react-icons/gr";
 
 const Product = () => {
+  const { addToFavorites } = favorites();
+  const { addToCart } = cart();
+
   const [products, setProducts] = useState([]);
   const parm = useParams();
   let idCat = parm.id;
@@ -19,30 +24,49 @@ const Product = () => {
       })
       .then((res) => {
         setProducts(res.data.data.products);
-        console.log(res.data.data.products);
+        // console.log(res.data.data.products);
       });
   }, []);
   return (
     <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {products.map((category) => (
-        <NavLink
-          key={category.documentId}
-          to={`./${category.documentId}`}
-          className=" group relative block overflow-hidden  rounded-2xl bg-white shadow-sm  hover:shadow-md transition "
-        >
-          {/* Image */}
-          <img
-            src={domain + category.cover.url}
-            alt=""
-            className=" w-full  h-56 object-contain transition-transform  duration-300  group-hover:scale-110 "
-          />
+      {products.map((product) => (
+        <div key={product.documentId}>
+          <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
+            <Link to={`./${product.documentId}`}>
+              <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
+                <img
+                  src={domain + product.cover.url}
+                  alt="product"
+                  className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
+                />
+              </div>
 
-          <div className=" absolute inset-0  bg-black/30 opacity-0 group-hover:opacity-100 transition " />
+              <div className="h-28 flex flex-col justify-between">
+                <h3 className="font-semibold">{product.name}</h3>
+                <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
+                  {product.desc}
+                </p>
+                <p className="font-bold">{product.price}</p>
+              </div>
+            </Link>
 
-          <h3 className="absolute bottom-4 left-1/2 -translate-x-1/2  text-xl font-bold transition-all duration-300 group-hover:bottom-6">
-            {category.name}
-          </h3>
-        </NavLink>
+            <div className="flex gap-3 mt-2">
+              <button
+                onClick={() => addToFavorites(product)}
+                className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
+              >
+                <GrFavorite className="text-2xl" />
+              </button>
+
+              <button
+                onClick={() => addToCart(product)}
+                className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
+              >
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );

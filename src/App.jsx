@@ -9,10 +9,13 @@ import Favorites from "./pages/Favorites";
 import Contact from "./pages/Contact";
 import Layout from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Order from "./pages/Order";
 
 const App = () => {
   return (
-    <div className=" bg-[#FFF7ED] text-black">
+    <div className=" bg-[#f1f1f1] text-black">
       <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
@@ -26,7 +29,10 @@ const App = () => {
             <Route path="favorites" element={<Favorites />} />
             <Route path="favorites/:productId" element={<ProductDetails />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="order" element={<Order />} />
           </Route>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
           <Route
             path="*"
             element={

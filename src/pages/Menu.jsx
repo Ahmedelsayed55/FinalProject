@@ -8,7 +8,7 @@ const Menu = () => {
   useEffect(() => {
     axios.get(domain + "/api/categories?populate=*").then((res) => {
       setCategories(res.data.data);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       
     });
   },[])
@@ -16,7 +16,7 @@ if (categories.length === 0) {
   return <div className="text-center font-bold text-3xl p-20">Loading...</div>;
 }
   return (
-    <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 py-20">
+    <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-20">
       {categories.map((category) => (
           <NavLink
           key={category.documentId}
@@ -32,7 +32,7 @@ if (categories.length === 0) {
 
         <div className=" absolute inset-0  bg-black/30 opacity-0 group-hover:opacity-100 transition "/>
 
-        <h3 className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-xl font-bold transition-all duration-300 group-hover:bottom-6">
+        <h3 className="absolute bottom-4 left-1/2 -translate-x-1/2 text-yellow-500 text-xl font-bold transition-all duration-300 group-hover:bottom-6">
          { category.name}
         </h3>
       </NavLink>

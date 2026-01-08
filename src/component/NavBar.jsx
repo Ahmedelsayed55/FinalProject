@@ -9,7 +9,7 @@ const NavBar = () => {
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
   return (
-    <div className="w-full bg-white shadow-md">
+    <div className="w-full fixed top-0 z-50  bg-white shadow-md">
       <div className=" container mx-auto flex  items-center justify-between p-4 text-[#7C2D12]">
         <h1>My Logo</h1>
         {/* nav for pc */}
@@ -48,7 +48,7 @@ const NavBar = () => {
             Menu
           </NavLink>
           <NavLink
-    className={({ isActive }) =>
+            className={({ isActive }) =>
               "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
               (isActive
                 ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
@@ -56,7 +56,7 @@ const NavBar = () => {
             }
             to="/cart"
           >
-            <FaCartShopping  className="text-2xl"/>
+            <FaCartShopping className="text-2xl" />
             {cartItem.length > 0 && (
               <span className="absolute -top-2 -right-4 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
                 {cartItem.length}
@@ -64,7 +64,7 @@ const NavBar = () => {
             )}
           </NavLink>
           <NavLink
-             className={({ isActive }) =>
+            className={({ isActive }) =>
               "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
               (isActive
                 ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
