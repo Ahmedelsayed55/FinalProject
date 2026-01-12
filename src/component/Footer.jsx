@@ -6,7 +6,6 @@ import { NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
 import { FaWhatsapp } from "react-icons/fa";
-import Contact from "./../pages/Contact";
 import { cart } from "../store/Store";
 import { favorites } from "../store/Favorites";
 const Footer = () => {

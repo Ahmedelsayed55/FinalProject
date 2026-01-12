@@ -18,7 +18,7 @@ const Order = () => {
         domain +
           "/api/orders?filters[users_permissions_user][id][$eq]=" +
           user.id +
-          "&populate=*"
+          "&populate=*",
       )
       .then((res) => {
         setOrders(res.data.data);

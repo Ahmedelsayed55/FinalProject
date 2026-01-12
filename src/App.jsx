@@ -1,4 +1,4 @@
-import React from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -6,7 +6,6 @@ import Product from "./pages/Product";
 import ProductDetails from "./pages/ProductDetails";
 import Menu from "./pages/Menu";
 import Favorites from "./pages/Favorites";
-import Contact from "./pages/Contact";
 import Layout from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
@@ -28,7 +27,6 @@ const App = () => {
             <Route path="menu/:id/:productId" element={<ProductDetails />} />
             <Route path="favorites" element={<Favorites />} />
             <Route path="favorites/:productId" element={<ProductDetails />} />
-            <Route path="contact" element={<Contact />} />
             <Route path="order" element={<Order />} />
           </Route>
           <Route path="/login" element={<Login />}/>

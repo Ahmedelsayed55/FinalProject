@@ -68,9 +68,9 @@ const NavForMobile = () => {
                 : "")
             }
             onClick={() => setOpen(false)}
-            to="/contact"
+            to="/order"
           >
-            Contact
+            Order
           </NavLink>
           <NavLink
             className={({ isActive }) =>

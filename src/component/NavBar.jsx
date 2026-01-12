@@ -5,6 +5,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
 import { cart } from "../store/Store";
 import { favorites } from "../store/Favorites";
+import { FaUserCircle } from "react-icons/fa";
 const NavBar = () => {
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
@@ -32,9 +33,9 @@ const NavBar = () => {
                 ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
                 : "")
             }
-            to="/contact"
+            to="/order"
           >
-            Contact
+            Order
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -78,6 +79,24 @@ const NavBar = () => {
                 {favoritesItem.length}
               </span>
             )}
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            }
+            onClick={()=>{
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+
+            }}
+            to="/login"
+          >
+            <FaUserCircle className="text-2xl" />
+         
+           
           </NavLink>
         </nav>
         {/* nav for mobile */}
