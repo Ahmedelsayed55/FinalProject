@@ -16,9 +16,7 @@ const Order = () => {
     axios
       .get(
         domain +
-          "/api/orders?filters[users_permissions_user][id][$eq]=" +
-          user.id +
-          "&populate=*",
+          `/api/orders?filters[users_permissions_user][id][$eq]=${user.id}&sort[0]=createdAt:desc&populate=*`
       )
       .then((res) => {
         setOrders(res.data.data);
@@ -33,19 +31,20 @@ const Order = () => {
     processing: "bg-yellow-100 text-yellow-800",
   };
   return (
-    <div>
+    <div className="container mx-auto p-5 h-[70vh] overflow-auto">
       {Orders.length === 0 ? (
         <h1 className="text-center text-2xl text-red-500 font-bold mt-10">
           No Orders Found..
         </h1>
       ) : (
-        <div className="overflow-x-auto mt-10">
+        <div className="overflow-auto mt-10">
           <table className="min-w-full bg-white rounded-lg shadow-md">
             <thead className="bg-gray-100">
               <tr className="text-gray-700 text-sm">
                 <th className="py-3 px-4 text-left">ID</th>
                 <th className="py-3 px-4 text-left">Name</th>
                 <th className="py-3 px-4 text-center">Quantity</th>
+                <th className="py-3 px-4 text-center">Price</th>
                 <th className="py-3 px-4 text-center">Status</th>
               </tr>
             </thead>
@@ -54,7 +53,7 @@ const Order = () => {
               {Orders?.map((order) => (
                 <tr
                   key={order.documentId}
-                  className="border-b last:border-b-0 hover:bg-gray-50 transition"
+                  className="border-b-violet-500 border-b last:border-b-0 hover:bg-gray-50 transition"
                 >
                   <td className="py-3 px-4 text-sm text-gray-700">
                     {order.documentId}
@@ -64,6 +63,9 @@ const Order = () => {
                   </td>
                   <td className="py-3 px-4 text-sm text-center text-gray-700">
                     {order.qty}
+                  </td>
+                  <td className="py-3 px-4 text-sm text-center text-gray-700">
+                    {order.price}
                   </td>
                   <td className="py-3 px-4 text-sm text-center">
                     <span

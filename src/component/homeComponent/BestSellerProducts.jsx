@@ -64,7 +64,7 @@ const BestSellerProducts = () => {
                     <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
                       {item.desc}
                     </p>
-                    <p className="font-bold">{item.price}</p>
+                    <p className="font-bold">${item.price}</p>
                   </div>
                 </Link>
 

@@ -121,7 +121,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between mb-2">
               <span>Tax:</span>
-              <span>${(14 * total) / 100}</span>
+              <span>{(14 * total) / 100}</span>
             </div>
             <div className="flex justify-between font-semibold mt-4">
               <span>Total:</span>
