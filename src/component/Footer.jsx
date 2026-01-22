@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
@@ -6,13 +6,27 @@ import { NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
 import { FaWhatsapp } from "react-icons/fa";
-import { cart } from "../store/Store";
+import { cart, domain } from "../store/Store";
 import { favorites } from "../store/Favorites";
+import axios from "axios";
 const Footer = () => {
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
+  const [style, setStyle] = useState();
+  useEffect(()=>{
+    let url = domain + "/api/style-footers"
+    axios.get(url).then((res)=>{
+      console.log(res.data.data[0])
+      setStyle(res.data.data[0])
+    })
+  },[])
   return (
-    <div className="bg-[#7C2D12] text-[#FFF7ED] border-t-2 border-[#FB923C]">
+    <div
+     style={{
+      background: style?.bg,
+      color: style?.text
+    }}
+    className="bg-[#7C2D12] text-[#FFF7ED] border-t-2 border-[#FB923C]">
       <div className="container mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-20 p-4">
         <h1>My Logo</h1>
         <div>

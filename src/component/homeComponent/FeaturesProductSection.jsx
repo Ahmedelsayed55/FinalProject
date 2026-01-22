@@ -28,6 +28,15 @@ const FeaturesProductSection = () => {
     });
   }, []);
 
+  const [style, setStyle] = useState();
+  useEffect(() => {
+    let url = domain + "/api/style-cards";
+    axios.get(url).then((res) => {
+      console.log(res.data.data[0]);
+      setStyle(res.data.data[0]);
+    });
+  }, []);
+
   return (
     <div className="w-full ">
       <div className="container mx-auto mb-5 py-20 ">
@@ -49,7 +58,13 @@ const FeaturesProductSection = () => {
         >
           {Features.map((item) => (
             <SwiperSlide key={item.documentId}>
-              <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
+              <div
+                style={{
+                  background: style?.bg,
+                  color: style?.text,
+                }}
+                className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white"
+              >
                 <Link to={`./${item.documentId}`}>
                   <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
                     <img
@@ -77,8 +92,13 @@ const FeaturesProductSection = () => {
                   </button>
 
                   <button
+                    style={{
+                      "--btn-bg": style?.btnbg,
+                      "--btn-text": style?.btntext,
+                      "--btn-hover": style?.btnhover,
+                    }}
                     onClick={() => addToCart(item)}
-                    className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
+                    className="px-3 card-btn w-full cursor-pointer py-3 bg-black text-white rounded-2xl  active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
                   >
                     Add to cart
                   </button>

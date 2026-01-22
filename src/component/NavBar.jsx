@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavBarForMobile from "./NavForMobile";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
-import { cart } from "../store/Store";
+import { cart, domain } from "../store/Store";
 import { favorites } from "../store/Favorites";
 import { FaUserCircle } from "react-icons/fa";
+import axios from "axios";
 const NavBar = () => {
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
+  const [style, setStyle] = useState();
+  useEffect(() => {
+    let url = domain + "/api/style-nav-for-desks";
+    axios.get(url).then((res) => {
+      console.log(res.data.data[0]);
+      setStyle(res.data.data[0]);
+    });
+  }, []);
   return (
-    <div className="w-full fixed top-0 z-50  bg-white shadow-md">
+    <div
+      style={{
+        background: style?.bg,
+        color: style?.text,
+      }}
+      className="w-full fixed top-0 z-50  bg-white shadow-md"
+    >
       <div className=" container mx-auto flex  items-center justify-between p-4 text-[#7C2D12]">
         <h1>My Logo</h1>
         {/* nav for pc */}
@@ -87,16 +102,13 @@ const NavBar = () => {
                 ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
                 : "")
             }
-            onClick={()=>{
+            onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
-
             }}
             to="/login"
           >
             <FaUserCircle className="text-2xl" />
-         
-           
           </NavLink>
         </nav>
         {/* nav for mobile */}

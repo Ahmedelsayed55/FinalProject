@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+.card-btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.card-btn:hover {
+  background: var(--btn-hover);
+}
