@@ -27,11 +27,25 @@ const Product = () => {
         // console.log(res.data.data.products);
       });
   }, []);
+  const [style, setStyle] = useState();
+  useEffect(() => {
+    let url = domain + "/api/style-cards";
+    axios.get(url).then((res) => {
+      console.log(res.data.data[0]);
+      setStyle(res.data.data[0]);
+    });
+  }, []);
   return (
     <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {products.map((product) => (
         <div key={product.documentId}>
-          <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
+          <div
+            style={{
+              background: style?.bg,
+              color: style?.text,
+            }}
+            className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white"
+          >
             <Link to={`./${product.documentId}`}>
               <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
                 <img
@@ -59,6 +73,11 @@ const Product = () => {
               </button>
 
               <button
+                style={{
+                  "--btn-bg": style?.btnbg,
+                  "--btn-text": style?.btntext,
+                  "--btn-hover": style?.btnhover,
+                }}
                 onClick={() => addToCart(product)}
                 className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
               >
