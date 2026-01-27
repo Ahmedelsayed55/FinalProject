@@ -16,7 +16,7 @@ const Footer = () => {
   useEffect(()=>{
     let url = domain + "/api/style-footers"
     axios.get(url).then((res)=>{
-      console.log(res.data.data[0])
+      // console.log(res.data.data[0])
       setStyle(res.data.data[0])
     })
   },[])

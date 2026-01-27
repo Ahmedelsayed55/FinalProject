@@ -32,7 +32,7 @@ const FeaturesProductSection = () => {
   useEffect(() => {
     let url = domain + "/api/style-cards";
     axios.get(url).then((res) => {
-      console.log(res.data.data[0]);
+      // console.log(res.data.data[0]);
       setStyle(res.data.data[0]);
     });
   }, []);
@@ -56,56 +56,70 @@ const FeaturesProductSection = () => {
           modules={[Pagination, Autoplay]}
           className="mySwiper"
         >
-          {Features.map((item) => (
-            <SwiperSlide key={item.documentId}>
-              <div
-                style={{
-                  background: style?.bg,
-                  color: style?.text,
-                }}
-                className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white"
-              >
-                <Link to={`./${item.documentId}`}>
-                  <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
-                    <img
-                      src={domain + item.cover.url}
-                      alt="product"
-                      className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
+          {Features.length === 0 ? (
+            [1,2,3,4,5].map(()=>(
 
-                  <div className="h-28 flex flex-col justify-between">
-                    <h3 className="font-semibold">{item.name}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
-                      {item.desc}
-                    </p>
-                    <p className="font-bold">${item.price}</p>
-                  </div>
-                </Link>
-
-                <div className="flex gap-3 mt-2">
-                  <button
-                    onClick={() => addToFavorites(item)}
-                    className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
-                  >
-                    <GrFavorite className="text-2xl" />
-                  </button>
-
-                  <button
-                    style={{
-                      "--btn-bg": style?.btnbg,
-                      "--btn-text": style?.btntext,
-                      "--btn-hover": style?.btnhover,
-                    }}
-                    onClick={() => addToCart(item)}
-                    className="px-3 card-btn w-full cursor-pointer py-3 bg-black text-white rounded-2xl  active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
-                  >
-                    Add to cart
-                  </button>
-                </div>
+            <SwiperSlide>
+              <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
               </div>
             </SwiperSlide>
-          ))}
+            ))
+          ) : (
+            Features.map((item) => (
+              <SwiperSlide key={item.documentId}>
+                <div
+                  style={{
+                    background: style?.bg,
+                    color: style?.text,
+                  }}
+                  className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white"
+                >
+                  <Link to={`./${item.documentId}`}>
+                    <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
+                      <img
+                        src={domain + item.cover.url}
+                        alt="product"
+                        className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="h-28 flex flex-col justify-between">
+                      <h3 className="font-semibold">{item.name}</h3>
+                      <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
+                        {item.desc}
+                      </p>
+                      <p className="font-bold">${item.price}</p>
+                    </div>
+                  </Link>
+
+                  <div className="flex gap-3 mt-2">
+                    <button
+                      onClick={() => addToFavorites(item)}
+                      className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
+                    >
+                      <GrFavorite className="text-2xl" />
+                    </button>
+
+                    <button
+                      style={{
+                        "--btn-bg": style?.btnbg,
+                        "--btn-text": style?.btntext,
+                        "--btn-hover": style?.btnhover,
+                      }}
+                      onClick={() => addToCart(item)}
+                      className="px-3 card-btn w-full cursor-pointer py-3 bg-black text-white rounded-2xl  active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))
+          )}
         </Swiper>
       </div>
     </div>
