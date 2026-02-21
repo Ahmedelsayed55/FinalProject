@@ -29,45 +29,54 @@ const Product = () => {
   }, []);
   return (
     <div className="container mx-auto  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {products.map((product) => (
-        <div key={product.documentId}>
-          <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
-            <Link to={`./${product.documentId}`}>
-              <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
-                <img
-                  src={domain + product.cover.url}
-                  alt="product"
-                  className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                />
+      {products.length === 0 ? (
+        <div className="w-full h-screen flex flex-col items-center justify-center gap-5">
+          <h1 className="md:text-4xl font-bold">Please Select Category :)</h1>
+          <Link to={"/menu"} className="text-yellow-500 cursor-pointer px-5 py-3 rounded-2xl shadow bg-white border border-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 active:scale-90">
+            Go to Menu
+          </Link>
+        </div>
+      ) : (
+        products.map((product) => (
+          <div key={product.documentId}>
+            <div className="w-full flex flex-col gap-3 px-7 py-4 shadow-md rounded-md bg-white">
+              <Link to={`./${product.documentId}`}>
+                <div className="w-full h-44 overflow-hidden rounded-md shadow-md mb-3">
+                  <img
+                    src={domain + product.cover.url}
+                    alt="product"
+                    className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+
+                <div className="h-28 flex flex-col justify-between">
+                  <h3 className="font-semibold">{product.name}</h3>
+                  <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
+                    {product.desc}
+                  </p>
+                  <p className="font-bold">{product.price}</p>
+                </div>
+              </Link>
+
+              <div className="flex gap-3 mt-2">
+                <button
+                  onClick={() => addToFavorites(product)}
+                  className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
+                >
+                  <GrFavorite className="text-2xl" />
+                </button>
+
+                <button
+                  onClick={() => addToCart(product)}
+                  className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
+                >
+                  Add to cart
+                </button>
               </div>
-
-              <div className="h-28 flex flex-col justify-between">
-                <h3 className="font-semibold">{product.name}</h3>
-                <p className="text-sm text-gray-500 line-clamp-2 w-2/3">
-                  {product.desc}
-                </p>
-                <p className="font-bold">{product.price}</p>
-              </div>
-            </Link>
-
-            <div className="flex gap-3 mt-2">
-              <button
-                onClick={() => addToFavorites(product)}
-                className="px-3 cursor-pointer py-3 border rounded-2xl hover:bg-yellow-700 transition duration-300 active:bg-yellow-900 active:scale-90 hover:text-white"
-              >
-                <GrFavorite className="text-2xl" />
-              </button>
-
-              <button
-                onClick={() => addToCart(product)}
-                className="px-3 w-full cursor-pointer py-3 bg-black text-white rounded-2xl hover:bg-gray-700 active:bg-gray-900 active:scale-90 transition duration-300 hover:text-white"
-              >
-                Add to cart
-              </button>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };

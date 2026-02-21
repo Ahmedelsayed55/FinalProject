@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
-import { MdRemoveShoppingCart } from "react-icons/md";
-import { cart, domain } from "../store/Store";
-import axios from "axios";
+import { cart } from "../store/Store";
+
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import CartInfoPriceQty from "../component/cartComponent/CartInfoPriceQty";
+import CartInfoItem from "../component/cartComponent/CartInfoItem";
+import PaymentCart from "../component/cartComponent/PaymentCart";
 const Cart = () => {
-  const { cartItem, incrementQuantity, decrementQuantity, removeItem, total , clearCart } =
+  const { cartItem } =
     cart();
-  let navigate = useNavigate();
-  let user = JSON.parse(localStorage.getItem("user"));
-  let token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  
+  const token = localStorage.getItem("token");
   useEffect(() => {
     if (!token) {
       console.log("User not logged in");
@@ -17,34 +19,7 @@ const Cart = () => {
       navigate("/login");
     }
   }, []);
-  const checkout = () => {
-    cartItem.forEach((item) => {
-      axios
-        .post(
-          domain + "/api/orders",
-          {
-            data: {
-              name: item.name,
-              price: item.price,
-              qty: item.quantity,
-              users_permissions_user: user.id,
-              state: "vmhblgyvrkunwuu5zxbkfkhu",
-            },
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-          toast.success("Order placed successfully");
-          clearCart();
-          navigate("/order");
-        });
-    });
-  };
+
   return (
     <div className="w-full">
       <h1 className="text-3xl font-bold text-center">Cart Page</h1>
@@ -64,76 +39,14 @@ const Cart = () => {
                 key={itemCart.documentId}
                 className="w-full flex justify-between items-center gap-5 shadow  p-4"
               >
-                <div className="flex items-center gap-5">
-                  <div className="w-20 h-20 flex justify-center items-center rounded-md border overflow-hidden">
-                    <img
-                      className="w-full object-contain"
-                      src={domain + itemCart.cover.url}
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <h2>{itemCart.name}</h2>
-                    <p>${itemCart.price}</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center gap-10">
-                  <div className="flex items-center gap-10">
-                    <p>
-                      {" "}
-                      <span className="font-semibold">Total:</span> $
-                      {itemCart.price * itemCart.quantity}{" "}
-                    </p>
-                    <button className="text-red-500 text-2xl cursor-pointer hover:text-red-700 active:scale-90 active:text-red-900 transition duration-300">
-                      <MdRemoveShoppingCart
-                        onClick={() => removeItem(itemCart)}
-                      />
-                    </button>
-                  </div>
-                  <div className="flex items-center gap-7">
-                    <button
-                      onClick={() => decrementQuantity(itemCart)}
-                      className=" shadow text-[17px] px-2 rounded-md"
-                    >
-                      -
-                    </button>
-                    <span className="mb-2">{itemCart?.quantity}</span>
-                    <button
-                      onClick={() => incrementQuantity(itemCart)}
-                      className=" shadow text-[17px] px-2 rounded-md"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
+                {/* info item */}
+                <CartInfoItem itemCart={itemCart} />
+                {/* Qty and Price */}
+                <CartInfoPriceQty itemCart={itemCart} />
               </div>
             ))}
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md h-fit flex flex-col gap-7">
-            <h2 className="text-2xl font-semibold mb-4">Cart Summary</h2>
-            <div className="flex justify-between mb-2">
-              <span>Subtotal:</span>
-              <span>$ {total}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span>Shipping:</span>
-              <span>$10</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span>Tax:</span>
-              <span>{(14 * total) / 100}</span>
-            </div>
-            <div className="flex justify-between font-semibold mt-4">
-              <span>Total:</span>
-              <span>$ {(114 * total) / 100 + 10}</span>
-            </div>
-            <button
-              onClick={checkout}
-              className="bg-[#FB923C] text-white py-2 px-4 rounded-md mt-4 w-full"
-            >
-              Checkout
-            </button>
-          </div>
+          <PaymentCart />
         </div>
       )}
     </div>

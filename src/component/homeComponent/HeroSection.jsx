@@ -41,17 +41,25 @@ const HeroSection = () => {
           modules={[Autoplay, Pagination]}
           className="mySwiper"
         >
-          {imgHero.map((img) => (
-            <SwiperSlide key={img.id}>
-              <div className="w-full">
-                <img
-                  className="object-contain w-full h-full"
-                  src={domain + img.heroimg[0].url}
-                  alt=""
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          {imgHero.length === 0
+            ? [1, 2].map(() => (
+                <SwiperSlide>
+                  <div className="skeleton bg-gray-800 w-full h-[50dvh] p-10 shadow">
+                    <img className="skeleton w-full" alt="" />
+                  </div>
+                </SwiperSlide>
+              ))
+            : imgHero.map((img) => (
+                <SwiperSlide key={img.id}>
+                  <div className="w-full">
+                    <img
+                      className="object-contain w-full h-full"
+                      src={domain + img?.heroimg[0]?.url}
+                      alt=""
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>

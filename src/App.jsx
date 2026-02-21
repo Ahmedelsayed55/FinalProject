@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Order from "./pages/Order";
+import CheckOut from "./pages/CheckOut";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="favorites" element={<Favorites />} />
             <Route path="favorites/:productId" element={<ProductDetails />} />
             <Route path="order" element={<Order />} />
+            <Route path="checkout" element={<CheckOut />} />
           </Route>
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
