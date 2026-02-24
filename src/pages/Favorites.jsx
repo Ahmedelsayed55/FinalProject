@@ -17,12 +17,12 @@ const Favorites = () => {
   return (
     <div className="w-full py-5">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
           <div className="flex gap-5 items-center">
             <FaStar className="text-yellow-500 text-4xl" />
             <h1 className="text-5xl font-bold">FAVORITES</h1>
           </div>
-          <div className="w-1/2">
+          <div className="w-full px-3 md:w-1/2">
             <input
               type="text"
               value={search}
@@ -32,7 +32,7 @@ const Favorites = () => {
             />
           </div>
         </div>
-        <p className="text-gray-500 text-2xl mt-10">
+        <p className="text-gray-500 text-center md:text-start text-2xl mt-10">
           Here You can find your favorite products :)
         </p>
         {filteredFavorites.length > 0 ? (

@@ -4,7 +4,7 @@ const DiscountCheckout = () => {
   return (
     <div >
       <h1 className="text-[#22222280] mb-4">Have a discount code?</h1>
-      <div className="flex gap-3 w-full">
+      <div className="flex flex-col md:flex-row gap-3 w-full">
         <input
           type="text"
           placeholder="Enter Promo Code"
