@@ -31,7 +31,7 @@ const ProductDetails = () => {
   }, [productId]);
 
   if (!product)
-    return <p className="text-center text-3xl mt-10">Loading ...</p>;
+    return <p className="text-center text-3xl mt-10 h-screen">Loading ...</p>;
 
   return (
     <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 py-10">

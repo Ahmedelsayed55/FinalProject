@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrFavorite } from "react-icons/gr";
 import { CiMenuFries } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { cart } from "../store/Store";
 import { favorites } from "../store/Favorites";
+import UserModel from "./UserModel";
+import { FaUserCircle } from "react-icons/fa";
 const NavForMobile = () => {
+  const [showModel, setShowModel] = useState();
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
   const [open, setOpen] = React.useState(false);
   return (
     <div className="md:hidden">
       <nav className=" flex items-center justify-center gap-5 text-2xl">
-        <NavLink className="flex relative p-3" to="/cart">
+        <NavLink className={({ isActive }) =>
+              "transition duration-200 hover:text-[#FB923C] font-bold" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            } to="/cart">
           <FaCartShopping />
           {cartItem.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
@@ -20,7 +28,12 @@ const NavForMobile = () => {
             </span>
           )}
         </NavLink>
-        <NavLink className="flex relative p-3" to="/favorites">
+        <NavLink className={({ isActive }) =>
+              "transition duration-200 hover:text-[#FB923C] font-bold" +
+              (isActive
+                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
+                : "")
+            } to="/favorites">
           <GrFavorite />
           {favoritesItem.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-[#FB923C] text-[#431407] w-5 h-5 text-xs flex items-center justify-center rounded-full font-bold">
@@ -28,6 +41,16 @@ const NavForMobile = () => {
             </span>
           )}
         </NavLink>
+        <div className="relative">
+          <button
+            onClick={() => {
+              setShowModel(!showModel);
+            }}
+          >
+            <FaUserCircle className="text-2xl" />
+          </button>
+          {showModel && <UserModel />}
+        </div>
         <CiMenuFries
           onClick={() => setOpen(!open)}
           className="cursor-pointer font-bold"

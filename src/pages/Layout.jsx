@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import NavBar from "../component/NavBar";
-import { Outlet } from "react-router-dom";
-import Footer from "../component/Footer";
+import { useEffect } from "react";
+
+import { Outlet  } from "react-router-dom";
 import axios from "axios";
+import { domain } from "../store/Store";
+import NavBar from "../component/NavBar";
+import Footer from './../component/Footer';
 
 const Layout = () => {
+
   let token = localStorage.getItem("token");
-  let domain = "http://localhost:1337";
   useEffect(() => {
     let url = domain + "/api/users/me";
     if (token) {

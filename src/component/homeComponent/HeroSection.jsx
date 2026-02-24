@@ -51,9 +51,9 @@ const HeroSection = () => {
               ))
             : imgHero.map((img) => (
                 <SwiperSlide key={img.id}>
-                  <div className="w-full">
+                  <div className="w-full h-62.5 md:h-75 lg:h-[550px] ">
                     <img
-                      className="object-contain w-full h-full"
+                      className="object-cover h-full w-full"
                       src={domain + img?.heroimg[0]?.url}
                       alt=""
                     />

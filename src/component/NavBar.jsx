@@ -6,8 +6,11 @@ import { GrFavorite } from "react-icons/gr";
 import { cart, domain } from "../store/Store";
 import { favorites } from "../store/Favorites";
 import { FaUserCircle } from "react-icons/fa";
+import logo from "../assets/Screenshot 2026-02-24 210857.png"
 import axios from "axios";
+import UserModel from "./UserModel";
 const NavBar = () => {
+  const [showModel, setShowModel]= useState()
   const { favoritesItem } = favorites();
   const { cartItem } = cart();
   const [style, setStyle] = useState();
@@ -26,8 +29,8 @@ const NavBar = () => {
       }}
       className="w-full fixed top-0 z-50  bg-white shadow-md"
     >
-      <div className=" container mx-auto flex  items-center justify-between p-4 text-[#7C2D12]">
-        <h1>My Logo</h1>
+      <div className=" container mx-auto flex  items-center justify-between p-4 ">
+        <img className="w-32" src={logo} alt="" />
         {/* nav for pc */}
         <nav className="hidden md:flex items-center justify-center gap-7">
           <NavLink
@@ -41,17 +44,7 @@ const NavBar = () => {
           >
             Home
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              "transition duration-200 hover:text-[#FB923C] font-bold" +
-              (isActive
-                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
-                : "")
-            }
-            to="/order"
-          >
-            Order
-          </NavLink>
+
           <NavLink
             className={({ isActive }) =>
               "transition duration-200 hover:text-[#FB923C] font-bold" +
@@ -95,21 +88,20 @@ const NavBar = () => {
               </span>
             )}
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              "relative transition duration-200 hover:text-[#FB923C] font-bold p-1.5" +
-              (isActive
-                ? " text-[#FB923C] border-b-2 border-[#FB923C] pb-1"
-                : "")
+          <div className="relative">
+            <button
+            className="cursor-pointer"
+              onClick={() => {
+                setShowModel(!showModel)
+              }}
+            >
+              <FaUserCircle className="text-2xl" />
+            </button>
+            {
+
+              showModel && <UserModel />
             }
-            onClick={() => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-            }}
-            to="/login"
-          >
-            <FaUserCircle className="text-2xl" />
-          </NavLink>
+          </div>
         </nav>
         {/* nav for mobile */}
         <NavBarForMobile className="md:hidden" />
